@@ -1,14 +1,19 @@
--- DROP DATABASE IF EXISTS test;
--- DROP USER IF EXISTS test;
--- CREATE USER test;
--- CREATE DATABASE test;
--- CREATE EXTENSION postgis;
-CREATE SCHEMA IF NOT EXISTS test AUTHORIZATION test;
+CREATE ROLE testuser WITH LOGIN PASSWORD '12345';
+CREATE DATABASE test_database;
+GRANT ALL PRIVILEGES ON DATABASE test_database TO testuser;
+ALTER ROLE testuser superuser;
 
-GRANT ALL PRIVILEGES ON DATABASE test TO test;
-
-CREATE TABLE registerUser (
+CREATE TABLE register_user (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(200)
+    user_name VARCHAR(200) NOT NULL,
+    create_on timestamp NOT NULL,
+    update_on timestamp,
+    rewards integer
 );
+
+
+
+
+
+
 

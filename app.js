@@ -31,25 +31,7 @@ app.get('/', (req, res) => {
 app.get('/greeting', (req, res) => {
     res.json('Welcome to account rewards system version ' + pkg.version)
 })
-
-
-
-//test
-app.use('/foo', require('./server/api/router/foo.js'));
 app.use('/users/', require('./server/api/users/router')())
-
-app.post('/login', helpers.verifyUser, (req, res) => {
-    console.log('redirecting to CMS pages')
-
-})
-
-
-
-// app.use('/register/', require('./api/users/router')())
-
-
-
-
 
 app.use(function (err, req, res, next) {
     log.error('app.use error handler %s: %s', new Date(), err.stack)
@@ -62,3 +44,5 @@ if (process.env.RUN_LOCAL_PORT) {
         console.log('Server running at:' + server.address().port)
     })
 }
+
+module.exports = app

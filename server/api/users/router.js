@@ -15,7 +15,7 @@ module.exports = (() => {
             const userDetails = req.body
             log.info('/create user details: %s', userDetails)
 
-            return createUserDetails.create(userDetails)
+            return createUser.create(userDetails)
                 .then((created) => {
                     log.info('/create created: %j', created)
                     res.json(created)

@@ -5,20 +5,28 @@
   "main": "app.js",
   "scripts": {
     "start": "RUN_LOCAL_PORT=3000 node app.js",
-    "start_dev": "RUN_LOCAL_PORT=3000 nodemon app.js"
+    "start-dev": "RUN_LOCAL_PORT=3000 nodemon app.js",
+    "test-db": "mocha --watch database/*.spec.js",
+    "test-create-user": "mocha  --watch server/api/users/Crea*.spec.js"
   },
   "author": "YL",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "express-validator": "^3.2.1",
+    "is-empty": "^1.2.0",
+    "pg-promise": "^6.5.0",
+    "q": "^1.5.0",
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "chai": "^4.1.1",
     "cz-conventional-changelog": "2.0.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   }
 }

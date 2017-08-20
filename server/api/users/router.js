@@ -4,6 +4,7 @@ const log = require('../../../logs/Log').create()
 const createUser = require('./CreateUser')
 const findUser = require('./FindUser')
 const updateUserRewards = require('./UpdateUserRewards')
+const deleter = require('./DeleteUser')
 
 module.exports = (() => {
     log.info('users router start...')
@@ -59,6 +60,21 @@ module.exports = (() => {
                     res.status(err.statusCode).send({text: err.text})
                 })
 
+        })
+
+    //Delete a member and reward
+    router.route('/:id')
+        .delete((req, res) => {
+            const id = req.params.id
+            log.info('/:id: %s', id)
+            deleter.delete(id).then((data) => {
+                log.info('/ user account deleted')
+                res.json(data);
+            })
+                .catch((err) => {
+                    log.error('/ err: %j', err)
+                    res.status(err.statusCode).send({text: err.text})
+                })
         })
 
     return router;

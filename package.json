@@ -9,7 +9,8 @@
     "test-db": "mocha --watch database/*.spec.js",
     "test-create-user": "mocha  --watch server/api/users/Crea*.spec.js",
     "test-find-user": "mocha --watch server/api/users/Find*.spec.js",
-    "test-update-rewards": "mocha --watch server/api/users/UpdateUserRewards.spec.js"
+    "test-update-rewards": "mocha --watch server/api/users/UpdateUserRewards.spec.js",
+    "test-del-account": "mocha --watch server/api/users/Del*.spec.js"
   },
   "author": "YL",
   "license": "ISC",

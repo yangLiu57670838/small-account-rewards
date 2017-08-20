@@ -6,14 +6,10 @@
 # Installation instructions
 * brew install postgresql
 * npm install nodemon mocha -g
-
 * Please run the sql commands in ./database/init.sql before you run this program or tests
 
 # Run
 npm start
-
-# Run test files
-npm test
 
 # Scopes
 
@@ -38,10 +34,21 @@ npm test
 * Test: npm run test-find-user
 
 ## Delete a member and reward
+* Delete an user account depending on its id
+* Path: /users/:id
+* Delete
+* Test: npm run test-del-account
+(Warning: need to create a second account with id 2 before test this.)
 
 # Assumptions
-*
+* create a new account with a username, and it will assign some initialized reward points to this account
+* associate a reward to a member will add more reward points to its account
+* retrieve a member will get all data of this account including its reward points
+* delete a member will remove all data of this account including its reward points
 
 # Further plans
+* Associate a reward should add more reward points to its account instead of replacing the existing reword points
 * enable password during user creating and JSON Web Token
 * reward points should be associated with different reward levels (beginner, short-term customer, long-term customer)
+* workflow of tests can be improved
+* missing the express-validator part

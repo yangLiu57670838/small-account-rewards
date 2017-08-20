@@ -3,7 +3,6 @@
 * Node.js 8
 * npm 5
 
-
 # Installation instructions
 * brew install postgresql
 * npm install nodemon mocha -g
@@ -19,6 +18,10 @@ npm test
 # Scopes
 
 ## Creating a member and reward
+Create a user account and initialize its reward points to 100
+Path: /users/create
+Parameters: user_name
+Test: npm run test-create-user
 
 ## Associate a reward to a member
 
@@ -26,6 +29,9 @@ npm test
 
 ## Delete a member and reward
 
-## Further plans
+#Assumptions
+*
+
+# Further plans
 * enable password during user creating and JSON Web Token
 * reward points should be associated with different reward levels (beginner, short-term customer, long-term customer)

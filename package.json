@@ -1,0 +1,23 @@
+{
+  "name": "small-account-rewards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start_dev": "nodemon app.js"
+  },
+  "author": "YL",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.0.0",
+    "nodemon": "^1.11.0"
+  }
+}

@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "start_dev": "nodemon app.js"
+    "start": "RUN_LOCAL_PORT=3000 node app.js",
+    "start_dev": "RUN_LOCAL_PORT=3000 nodemon app.js"
   },
   "author": "YL",
   "license": "ISC",
@@ -14,10 +14,11 @@
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
+    "express-validator": "^3.2.1",
     "winston": "^2.3.1"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^2.0.0",
+    "cz-conventional-changelog": "2.0.0",
     "nodemon": "^1.11.0"
   }
 }

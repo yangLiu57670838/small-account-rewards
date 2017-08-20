@@ -3,7 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
-
+const expressValidator = require('express-validator')
 
 const pkg = require('./package.json')
 const helpers = require('./server/helpers')
@@ -19,13 +19,15 @@ log.info('Welcome to small-account-rewards API %s, process.env.NODE_ENV: %s, POS
 
 app.use(cors());//enable cross origin resource sharing for this system
 app.use(bodyParser.json());
+app.use(expressValidator({
+    customValidators: {
+    }
+}))
 app.use(bodyParser.urlencoded({extended: true}))
-
 
 app.get('/', (req, res) => {
     res.redirect('/greeting');
 })
-
 app.get('/greeting', (req, res) => {
     res.json('Welcome to account rewards system version ' + pkg.version)
 })
@@ -34,7 +36,7 @@ app.get('/greeting', (req, res) => {
 
 //test
 app.use('/foo', require('./server/api/router/foo.js'));
-
+app.use('/users/', require('./server/api/users/router')())
 
 app.post('/login', helpers.verifyUser, (req, res) => {
     console.log('redirecting to CMS pages')
@@ -47,6 +49,16 @@ app.post('/login', helpers.verifyUser, (req, res) => {
 
 
 
-var server = app.listen(3000, function() {
-    console.log('Server running at:' + server.address().port)
+
+
+app.use(function (err, req, res, next) {
+    log.error('app.use error handler %s: %s', new Date(), err.stack)
+    res.status(500).send({error: err})
 })
+
+if (process.env.RUN_LOCAL_PORT) {
+    const port = Number(process.env.RUN_LOCAL_PORT);
+    var server = app.listen(port, function() {
+        console.log('Server running at:' + server.address().port)
+    })
+}

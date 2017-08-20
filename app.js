@@ -17,7 +17,7 @@ log.info('Welcome to small-account-rewards API %s, process.env.NODE_ENV: %s, POS
 );
 
 
-app.use(cors());
+app.use(cors());//enable cross origin resource sharing for this system
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 

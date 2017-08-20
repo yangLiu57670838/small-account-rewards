@@ -25,10 +25,11 @@ npm test
 * Test: npm run test-create-user
 
 ## Associate a reward to a member
-
-
-
-
+* Update a user reward points
+* Path: /users/update
+* Put
+* Parameters: {user_name: $user_name, rewards: $rewards}
+* Test: npm run test-update-rewards
 
 ## Retrieve a member and their rewards
 * Find a user account with its reward points depending on its id

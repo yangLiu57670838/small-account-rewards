@@ -3,7 +3,8 @@ const express = require('express')
 const log = require('../../../logs/Log').create()
 const createUser = require('./CreateUser')
 const findUser = require('./FindUser')
-// const updateUserDetails = require('./UpdateUserDetails')
+const updateUserRewards = require('./UpdateUserRewards')
+
 module.exports = (() => {
     log.info('users router start...')
 
@@ -27,6 +28,7 @@ module.exports = (() => {
 
         })
 
+    //Retrieve a member and their rewards
     router.route('/find/:id')
         .get((req, res) => {
             const id = req.params.id
@@ -40,6 +42,23 @@ module.exports = (() => {
                     res.status(err.statusCode).send({text: err.text})
 
                 })
+        })
+
+    //Associate a reward to a member
+    router.route('/update')
+        .put((req, res) => {
+            const userDetails = req.body;
+            log.info('/update user rewards: %s', userDetails)
+            return updateUserRewards.update(userDetails)
+                .then(() => {
+                    log.info('/update reward points successfull: %s', userDetails.user_name)
+                    res.json();
+                })
+                .catch((err) => {
+                    log.error('/update err: %j', err)
+                    res.status(err.statusCode).send({text: err.text})
+                })
+
         })
 
     return router;

@@ -2,7 +2,7 @@
 const Q = require('q')
 const log = require('../../../logs/Log').create()
 const connection = require('../../../database/CreateConnection')
-const profileFinder = require('./FindUser')
+const userFinder = require('./FindUser')
 
 exports.CreateUserDetails = (() => {
   const create = this
@@ -18,15 +18,15 @@ exports.CreateUserDetails = (() => {
     return db.one(query)
       .then((data) => {
         log.info('CreateUser.create created new user: %j ', data.id);
-        // return profileFinder.findByEmail(data.email)
+        return userFinder.findById(data.id)
         return true
       })
       .then((found) => {
-        log.info('CreateUserDetails.create loaded userProfile: %j ', found);
+        log.info('CreateUser.create loaded user: %j ', found);
         return found
       })
       .catch((error) => {
-        log.error('CreateUserDetails.create error: %j, params: %j, userDetails: %j', error, params, userDetails);
+        log.error('CreateUser.create error: %j, params: %j, userDetails: %j', error, params, userDetails);
         return Q.reject({statusCode: 500, text: 'There is a database error'});
       })
       .finally(function () {

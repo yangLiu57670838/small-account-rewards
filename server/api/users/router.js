@@ -2,7 +2,7 @@
 const express = require('express')
 const log = require('../../../logs/Log').create()
 const createUser = require('./CreateUser')
-// const findUserDetails = require('./FindUserDetails')
+const findUser = require('./FindUser')
 // const updateUserDetails = require('./UpdateUserDetails')
 module.exports = (() => {
     log.info('users router start...')
@@ -27,7 +27,20 @@ module.exports = (() => {
 
         })
 
+    router.route('/find/:id')
+        .get((req, res) => {
+            const id = req.params.id
+            return findUser.findById(id)
+                .then((foundDetails) => {
+                    log.info('/find found details: %s', id)
+                    res.json(foundDetails)
+                })
+                .catch((err) => {
+                    log.error('/find err: %j', err)
+                    res.status(err.statusCode).send({text: err.text})
 
+                })
+        })
 
     return router;
 

@@ -21,8 +21,7 @@ describe('CreateUser', function () {
         log.info('created text %j', created)
 
         expect(created).to.be.ok;
-        expect(created.details).to.be.ok;
-        expect(created.details.user_name).to.be.ok;
+        expect(created.user_name).to.be.ok;
 
         done()
       });

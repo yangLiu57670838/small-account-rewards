@@ -1,35 +1,23 @@
 'use strict';
-const app = require('../app');
+const app = require('../../../app');
 const chai = require('chai');
 const request = require('supertest');
 const expect = chai.expect;
-const assert = chai.assert;
-const log = require('../logs/Log').create()
-const data = require('./UserData')
+const log = require('../../../logs/Log').create()
+describe('Find user tests', function () {
+  it('should return user details for id 1', function (done) {
 
-describe('FindUserProfile', function() {
-  const email = data.test6Id()
-
-  it('should userProfile for email ' + email, function(done) {
-    const token = require('../auth0/GenerateTestToken')
     request(app)
-      .get('/fishers/user-profiles/' + email)
-      .set('authorization', 'Bearer ' + token)
-      .then((res) => {
+      .get('/users/find/1')
+      .expect(200)
+      .end(function (err, res) {
         const found = res.body;
-
-        log.info('found: %j', found)
-
-        expect(found).to.be.ok
-
-        expect(found.details.email).to.equal(email)
-
-        done()
-      }).catch((errors) => {
-      log.error('failed catch %s', errors)
-      done(errors)
-    })
-
+        log.info('Test User Details find')
+        expect(res.statusCode).to.equal(200);
+        expect(found).to.be.ok;
+        expect(found.rewards).to.be.ok;
+        expect(found.id).to.equal(1);
+        done();
+      });
   });
-
 });
